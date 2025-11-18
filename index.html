@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scent & Cards - Perfumes & Pokémon Egypt</title>
+    <title>Perfume Hub - Premium Fragrances Egypt</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Load React FIRST -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -16,35 +16,67 @@
         const { createElement: e, useState } = React;
 
         function App() {
-            const [activeTab, setActiveTab] = useState('perfumes');
+            const [activeTab, setActiveTab] = useState('mens');
 
-            const perfumes = [
+            const mensPerfumes = [
                 { name: "Dior Sauvage", price: 1000, badge: "BESTSELLER" },
                 { name: "Bleu de Chanel", price: 1500, badge: "PREMIUM" },
                 { name: "Versace Eros", price: 1200, badge: "HOT" },
+                { name: "Emporio Armani Stronger With You", price: 1300 },
+                { name: "Valentino Uomo Born in Roma", price: 1400 },
+                { name: "Versace Dylan Blue", price: 1200 },
                 { name: "YSL Y", price: 1400 },
                 { name: "Jean Paul Gaultier Le Male", price: 1500, deal: "4 for 4,000 EGP" },
                 { name: "Jean Paul Gaultier Le Beau", price: 1500, deal: "4 for 4,000 EGP" },
                 { name: "Jean Paul Gaultier Ultra Male", price: 1500, deal: "4 for 4,000 EGP" },
                 { name: "Jean Paul Gaultier Le Male Elixir", price: 1500, deal: "4 for 4,000 EGP" },
-                { name: "Khamrah by Lattafa", price: 900, badge: "ARABIC SCENT" },
                 { name: "Afnan 9PM", price: 700, badge: "VALUE PICK" }
             ];
 
-            const pokemon = [
-                { name: "Charizard EX (Obsidian Flames #054)", price: "Negotiable", rare: true },
-                { name: "Garchomp EX (#219)", price: "Negotiable" },
-                { name: "Snorlax GX (SM05)", price: "Negotiable" },
-                { name: "Pikachu", price: "Negotiable" },
-                { name: "Gyarados GX (Dragon Rage)", price: "Negotiable" }
+            const womensPerfumes = [
+                { name: "Carolina Herrera Good Girl", price: 1400, badge: "BESTSELLER" },
             ];
+
+            const unisexPerfumes = [
+                { name: "Khamrah by Lattafa", price: 900, badge: "ARABIC SCENT" },
+            ];
+
+            const renderPerfumes = (perfumes) => {
+                return e('div', null,
+                    e('div', { className: 'bg-gray-900 text-white p-4 rounded-lg mb-6' },
+                        e('p', { className: 'text-sm font-medium' }, 'Special Offer: Buy any 4 JPG fragrances for 4,000 EGP')
+                    ),
+                    e('div', { className: 'space-y-4' },
+                        perfumes.map((perfume, idx) =>
+                            e('div', { key: idx, className: 'bg-white border border-gray-200 rounded-lg p-5 hover:border-gray-300 transition-colors' },
+                                e('div', { className: 'flex justify-between items-start' },
+                                    e('div', { className: 'flex-1' },
+                                        e('div', { className: 'flex items-center gap-2 mb-1' },
+                                            e('h3', { className: 'text-lg font-medium text-gray-900' }, perfume.name),
+                                            perfume.badge && e('span', { className: 'text-xs px-2 py-1 bg-gray-900 text-white rounded' }, perfume.badge)
+                                        ),
+                                        perfume.deal && e('p', { className: 'text-sm text-gray-600 mt-1' }, perfume.deal)
+                                    ),
+                                    e('div', { className: 'text-right' },
+                                        e('p', { className: 'text-xl font-light text-gray-900' }, `${perfume.price} EGP`)
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    e('div', { className: 'mt-8 p-4 bg-gray-100 rounded-lg text-center' },
+                        e('p', { className: 'text-sm text-gray-700' }, 'Looking for other perfumes?'),
+                        e('a', { href: 'tel:01287620084', className: 'text-gray-900 font-medium hover:underline' }, 'Text me: 01287620084')
+                    )
+                );
+            };
 
             return e('div', { className: 'min-h-screen' },
                 // Header
                 e('header', { className: 'bg-white border-b border-gray-200' },
                     e('div', { className: 'max-w-4xl mx-auto px-4 py-6' },
-                        e('h1', { className: 'text-3xl font-light text-gray-900' }, 'Scent & Cards'),
-                        e('p', { className: 'text-sm text-gray-500 mt-1' }, 'Premium Perfumes & Collectibles in Egypt')
+                        e('h1', { className: 'text-3xl font-light text-gray-900' }, 'Perfume Hub'),
+                        e('p', { className: 'text-sm text-gray-500 mt-1' }, 'Premium Fragrances in Egypt')
                     )
                 ),
 
@@ -53,86 +85,56 @@
                     e('div', { className: 'max-w-4xl mx-auto px-4' },
                         e('div', { className: 'flex space-x-8' },
                             e('button', {
-                                onClick: () => setActiveTab('perfumes'),
+                                onClick: () => setActiveTab('mens'),
                                 className: `py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
-                                    activeTab === 'perfumes'
+                                    activeTab === 'mens'
                                         ? 'border-gray-900 text-gray-900'
                                         : 'border-transparent text-gray-500 hover:text-gray-700'
                                 }`
-                            }, 'Perfumes'),
+                            }, "Men's"),
                             e('button', {
-                                onClick: () => setActiveTab('pokemon'),
+                                onClick: () => setActiveTab('womens'),
                                 className: `py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
-                                    activeTab === 'pokemon'
+                                    activeTab === 'womens'
                                         ? 'border-gray-900 text-gray-900'
                                         : 'border-transparent text-gray-500 hover:text-gray-700'
                                 }`
-                            }, 'Pokémon Cards')
+                            }, "Women's"),
+                            e('button', {
+                                onClick: () => setActiveTab('unisex'),
+                                className: `py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+                                    activeTab === 'unisex'
+                                        ? 'border-gray-900 text-gray-900'
+                                        : 'border-transparent text-gray-500 hover:text-gray-700'
+                                }`
+                            }, 'Unisex')
                         )
                     )
                 ),
 
                 // Content
                 e('main', { className: 'max-w-4xl mx-auto px-4 py-8' },
-                    activeTab === 'perfumes' ? 
-                        e('div', null,
-                            e('div', { className: 'mb-6' },
-                                e('h2', { className: 'text-2xl font-light text-gray-900 mb-2' }, 'Perfumes'),
-                                e('p', { className: 'text-sm text-gray-600' }, 'Premium fragrances available in Cairo')
-                            ),
-                            e('div', { className: 'bg-gray-900 text-white p-4 rounded-lg mb-6' },
-                                e('p', { className: 'text-sm font-medium' }, 'Special Offer: Buy any 4 JPG fragrances for 4,000 EGP')
-                            ),
-                            e('div', { className: 'space-y-4' },
-                                perfumes.map((perfume, idx) =>
-                                    e('div', { key: idx, className: 'bg-white border border-gray-200 rounded-lg p-5 hover:border-gray-300 transition-colors' },
-                                        e('div', { className: 'flex justify-between items-start' },
-                                            e('div', { className: 'flex-1' },
-                                                e('div', { className: 'flex items-center gap-2 mb-1' },
-                                                    e('h3', { className: 'text-lg font-medium text-gray-900' }, perfume.name),
-                                                    perfume.badge && e('span', { className: 'text-xs px-2 py-1 bg-gray-900 text-white rounded' }, perfume.badge)
-                                                ),
-                                                perfume.deal && e('p', { className: 'text-sm text-gray-600 mt-1' }, perfume.deal)
-                                            ),
-                                            e('div', { className: 'text-right' },
-                                                e('p', { className: 'text-xl font-light text-gray-900' }, `${perfume.price} EGP`)
-                                            )
-                                        )
-                                    )
-                                )
-                            ),
-                            e('div', { className: 'mt-8 p-4 bg-gray-100 rounded-lg text-center' },
-                                e('p', { className: 'text-sm text-gray-700' }, 'Looking for other perfumes?'),
-                                e('a', { href: 'tel:01287620084', className: 'text-gray-900 font-medium hover:underline' }, 'Text me: 01287620084')
-                            )
-                        ) :
-                        e('div', null,
-                            e('div', { className: 'mb-6' },
-                                e('h2', { className: 'text-2xl font-light text-gray-900 mb-2' }, 'Pokémon Cards'),
-                                e('p', { className: 'text-sm text-gray-600' }, 'Collectible cards available for purchase')
-                            ),
-                            e('div', { className: 'space-y-4' },
-                                pokemon.map((card, idx) =>
-                                    e('div', { key: idx, className: 'bg-white border border-gray-200 rounded-lg p-5 hover:border-gray-300 transition-colors' },
-                                        e('div', { className: 'flex justify-between items-start' },
-                                            e('div', { className: 'flex-1' },
-                                                e('div', { className: 'flex items-center gap-2' },
-                                                    e('h3', { className: 'text-lg font-medium text-gray-900' }, card.name),
-                                                    card.rare && e('span', { className: 'text-xs px-2 py-1 bg-gray-900 text-white rounded' }, 'RARE')
-                                                )
-                                            ),
-                                            e('div', { className: 'text-right' },
-                                                e('p', { className: 'text-lg font-light text-gray-600' }, card.price)
-                                            )
-                                        )
-                                    )
-                                )
-                            ),
-                            e('div', { className: 'mt-8 p-4 bg-gray-100 rounded-lg text-center' },
-                                e('p', { className: 'text-sm text-gray-700' }, 'Looking for other cards?'),
-                                e('a', { href: 'tel:01287620084', className: 'text-gray-900 font-medium hover:underline' }, 'Text me: 01287620084')
-                            )
-                        )
+                    activeTab === 'mens' && e('div', null,
+                        e('div', { className: 'mb-6' },
+                            e('h2', { className: 'text-2xl font-light text-gray-900 mb-2' }, "Men's Fragrances"),
+                            e('p', { className: 'text-sm text-gray-600' }, 'Premium perfumes for men available in Cairo')
+                        ),
+                        renderPerfumes(mensPerfumes)
+                    ),
+                    activeTab === 'womens' && e('div', null,
+                        e('div', { className: 'mb-6' },
+                            e('h2', { className: 'text-2xl font-light text-gray-900 mb-2' }, "Women's Fragrances"),
+                            e('p', { className: 'text-sm text-gray-600' }, 'Premium perfumes for women available in Cairo')
+                        ),
+                        renderPerfumes(womensPerfumes)
+                    ),
+                    activeTab === 'unisex' && e('div', null,
+                        e('div', { className: 'mb-6' },
+                            e('h2', { className: 'text-2xl font-light text-gray-900 mb-2' }, 'Unisex Fragrances'),
+                            e('p', { className: 'text-sm text-gray-600' }, 'Perfect for everyone - Arabic & niche perfumes')
+                        ),
+                        renderPerfumes(unisexPerfumes)
+                    )
                 ),
 
                 // Footer
