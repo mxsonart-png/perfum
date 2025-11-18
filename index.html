@@ -3,103 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Perfume Haven</title>
-    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <title>Perfume Haven - Premium Fragrances Egypt</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 </head>
 <body class="bg-gray-50">
+    <div id="app"></div>
 
-<div id="root"></div>
+    <script>
+        const { createElement: e, useState } = React;
 
-<script>
-    const e = React.createElement;
+        function App() {
+            const [activeTab, setActiveTab] = useState('mens');
 
-    function App() {
-        const [activeTab, setActiveTab] = React.useState('men');
+            const mensPerfumes = [
+                { name: "Dior Sauvage", originalPrice: 5000, price: 3000, badge: "BESTSELLER" },
+                { name: "Bleu de Chanel", originalPrice: 5000, price: 2000, badge: "PREMIUM" },
+                { name: "Versace Eros", originalPrice: 3500, price: 2000, badge: "HOT" },
+                { name: "Emporio Armani Stronger With You", originalPrice: 3500, price: 2000 },
+                { name: "Valentino Uomo Born in Roma", originalPrice: 4000, price: 2500 },
+                { name: "Versace Dylan Blue", originalPrice: 3500, price: 2000 },
+                { name: "YSL Y", originalPrice: 3000, price: 2000 },
+                { name: "Jean Paul Gaultier Le Male", originalPrice: 3500, price: 1700, deal: "4 for 5,500 EGP" },
+                { name: "Jean Paul Gaultier Le Beau", originalPrice: 3500, price: 1700, deal: "4 for 5,500 EGP" },
+                { name: "Jean Paul Gaultier Ultra Male", originalPrice: 5000, price: 1700, deal: "4 for 5,500 EGP" },
+                { name: "Jean Paul Gaultier Le Male Elixir", originalPrice: 3500, price: 1700, deal: "4 for 5,500 EGP" },
+                { name: "Afnan 9PM", originalPrice: 2500, price: 1200, badge: "VALUE PICK" }
+            ];
 
-        const menPerfumes = [
-            { name: "Paco Rabanne Invictus", img: "perf(1).jpeg" },
-            { name: "Dior Sauvage", img: "perf(2).jpeg" },
-            { name: "Versace Eros", img: "perf(3).jpeg" },
-            { name: "Bleu de Chanel", img: "perf(4).jpg" },
-            { name: "Bad Boy", img: "perf(5).jpg" },
-        ];
+            const womensPerfumes = [
+                { name: "Carolina Herrera Good Girl", originalPrice: 7000, price: 4000, badge: "BESTSELLER" },
+                { name: "Valentino Donna Born In Roma", originalPrice: 5000, price: 3200, badge: "HOT" },
+                { name: "Victoria's Secret", originalPrice: 4000, price: 2500 }
+            ];
 
-        const womenPerfumes = [
-            { name: "Jean Paul Gaultier Scandal", img: "perf(6).jpeg" },
-            { name: "Dior Addict", img: "perf(7).jpeg" },
-            { name: "Olympéa", img: "perf(8).jpeg" },
-            { name: "Good Girl", img: "perf(9).jpeg" },
-            { name: "Burberry Her", img: "perf(10).jpeg" },
-        ];
+            const unisexPerfumes = [
+                { name: "Khamrah by Lattafa", originalPrice: 6000, price: 3000, badge: "ARABIC SCENT" },
+                { name: "Jean Paul Gaultier Scandal", originalPrice: 6000, price: 4000, badge: "BESTSELLER" }
+            ];
 
-        const perfumeSets = [
-            { name: "Burberry Her Set", img: "perf(11).jpeg" },
-            { name: "Versace Dylan Blue Set", img: "perf(12).jpeg" },
-            { name: "Jean Paul Gaultier Le Male Set", img: "perf(13).jpeg" },
-        ];
-
-        function renderPerfumes(list) {
-            return e('div', { className: 'grid grid-cols-2 gap-4 p-4' },
-                list.map((item, index) =>
-                    e('div', { key: index, className: 'bg-white rounded-xl shadow-md p-4 text-center' },
-                        e('img', { src: item.img, className: 'w-full h-40 object-cover rounded-lg mb-3' }),
-                        e('p', { className: 'font-medium text-gray-800' }, item.name)
-                    )
-                )
-            );
-        }
-
-        function renderSets(list) {
-            return e('div', { className: 'grid grid-cols-1 gap-4 p-4' },
-                list.map((item, index) =>
-                    e('div', { key: index, className: 'bg-white rounded-xl shadow-md p-4 text-center' },
-                        e('img', { src: item.img, className: 'w-full h-48 object-cover rounded-lg mb-3' }),
-                        e('p', { className: 'font-medium text-gray-800 text-lg' }, item.name)
-                    )
-                )
-            );
-        }
-
-        return e('div', null,
-            e('h1', { className: 'text-center text-3xl font-bold py-6 text-gray-900' }, "The Perfume Haven"),
-
-            e('div', { className: 'flex justify-center space-x-4 mb-4' },
-                e('button', {
-                    className: `px-4 py-2 rounded-full ${activeTab === 'men' ? 'bg-black text-white' : 'bg-gray-300 text-gray-800'}`,
-                    onClick: () => setActiveTab('men')
-                }, "Men"),
-
-                e('button', {
-                    className: `px-4 py-2 rounded-full ${activeTab === 'women' ? 'bg-black text-white' : 'bg-gray-300 text-gray-800'}`,
-                    onClick: () => setActiveTab('women')
-                }, "Women"),
-
-                e('button', {
-                    className: `px-4 py-2 rounded-full ${activeTab === 'sets' ? 'bg-black text-white' : 'bg-gray-300 text-gray-800'}`,
-                    onClick: () => setActiveTab('sets')
-                }, "Sets")
-            ),
-
-            activeTab === 'men' && renderPerfumes(menPerfumes),
-            activeTab === 'women' && renderPerfumes(womenPerfumes),
-            activeTab === 'sets' && renderSets(perfumeSets),
-
-            // ⭐ INSTAGRAM SECTION ADDED HERE ⭐
-            e('div', { className: 'mt-16 mb-10 text-center' },
-                e('p', { className: 'text-sm text-gray-600 mb-2' }, 'Follow us on Instagram'),
-                e('a', {
-                    href: 'https://www.instagram.com/theperfumehaven.eg',
-                    target: '_blank',
-                    className: 'text-xl font-medium text-gray-900 hover:underline'
-                }, '@theperfumehaven.eg')
-            )
-        );
-    }
-
-    ReactDOM.render(e(App), document.getElementById('root'));
-</script>
-
-</body>
-</html>
+            const perfumeSets = [
+                { 
+                    name: "Men's Power Duo: Bleu de Chanel & Dior Sauvage Set",
+                    originalPrice: 6000,
+                    price: 5000,
+                    d
