@@ -3,213 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfume Haven - Premium Fragrances Egypt</title>
+    <title>The Perfume Haven</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load React FIRST -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 </head>
 <body class="bg-gray-50">
-    <div id="app"></div>
 
-    <script>
-        const { createElement: e, useState } = React;
+<div id="root"></div>
 
-        function App() {
-            const [activeTab, setActiveTab] = useState('mens');
+<script>
+    const e = React.createElement;
 
-            const mensPerfumes = [
-                { name: "Dior Sauvage", originalPrice: 5000, price: 3000, badge: "BESTSELLER" },
-                { name: "Bleu de Chanel", originalPrice: 5000, price: 2000, badge: "PREMIUM" },
-                { name: "Versace Eros", originalPrice: 3500, price: 2000, badge: "HOT" },
-                { name: "Emporio Armani Stronger With You", originalPrice: 3500, price: 2000 },
-                { name: "Valentino Uomo Born in Roma", originalPrice: 4000, price: 2500 },
-                { name: "Versace Dylan Blue", originalPrice: 3500, price: 2000 },
-                { name: "YSL Y", originalPrice: 3000, price: 2000 },
-                { name: "Jean Paul Gaultier Le Male", originalPrice: 3500, price: 1700, deal: "4 for 5,500 EGP" },
-                { name: "Jean Paul Gaultier Le Beau", originalPrice: 3500, price: 1700, deal: "4 for 5,500 EGP" },
-                { name: "Jean Paul Gaultier Ultra Male", originalPrice: 5000, price: 1700, deal: "4 for 5,500 EGP" },
-                { name: "Jean Paul Gaultier Le Male Elixir", originalPrice: 3500, price: 1700, deal: "4 for 5,500 EGP" },
-                { name: "Afnan 9PM", originalPrice: 2500, price: 1200, badge: "VALUE PICK" }
-            ];
+    function App() {
+        const [activeTab, setActiveTab] = React.useState('men');
 
-            const womensPerfumes = [
-                { name: "Carolina Herrera Good Girl", originalPrice: 7000, price: 4000, badge: "BESTSELLER" },
-                {name: "Valentino Donna Born In Roma", originalPrice: 5000, price: 3200, badge: "HOT" },
-                {name: "Victoria's Secret", originalPrice: 4000, price: 2500,},
-            ];
+        const menPerfumes = [
+            { name: "Paco Rabanne Invictus", img: "perf(1).jpeg" },
+            { name: "Dior Sauvage", img: "perf(2).jpeg" },
+            { name: "Versace Eros", img: "perf(3).jpeg" },
+            { name: "Bleu de Chanel", img: "perf(4).jpg" },
+            { name: "Bad Boy", img: "perf(5).jpg" },
+        ];
 
-            const unisexPerfumes = [
-                { name: "Khamrah by Lattafa", originalPrice: 6000, price: 3000, badge: "ARABIC SCENT" },
-                {name: "Jean Paul Gaultier Scandal", originalPrice: 6000, price: 4000, badge: "BESTSELLER" },
-            ];
+        const womenPerfumes = [
+            { name: "Jean Paul Gaultier Scandal", img: "perf(6).jpeg" },
+            { name: "Dior Addict", img: "perf(7).jpeg" },
+            { name: "Olympéa", img: "perf(8).jpeg" },
+            { name: "Good Girl", img: "perf(9).jpeg" },
+            { name: "Burberry Her", img: "perf(10).jpeg" },
+        ];
 
-const perfumeSets = [
-    { 
-        name: "Men's Power Duo: Bleu de Chanel & Dior Sauvage Set",
-        originalPrice: 6000,
-        price: 5000,
-        description: "Get both premium fragrances together for a bundled discount!"
-    },
-    {
-        name: "Women's Glamour Duo: Good Girl & Victoria's Secret Set",
-        originalPrice: 7300,
-        price: 6300,
-        description: "The perfect pair for any occasion, now at a special price."
-    },
-    {
-        name: "The Ultimate JPG Seasonal 4-Piece Set",
-        originalPrice: 6800,
-        price: 5500,
-        description:
-            "Includes Ultra Male, Le Male Le Parfum (Winter) and Le Beau, Le Male (Summer) for a full year rotation."
-    }
-];
+        const perfumeSets = [
+            { name: "Burberry Her Set", img: "perf(11).jpeg" },
+            { name: "Versace Dylan Blue Set", img: "perf(12).jpeg" },
+            { name: "Jean Paul Gaultier Le Male Set", img: "perf(13).jpeg" },
+        ];
 
-
-            const renderPerfumes = (perfumes) => {
-                return e('div', null,
-                    e('div', { className: 'bg-gray-900 text-white p-4 rounded-lg mb-6' },
-                        e('p', { className: 'text-sm font-medium' }, 'Special Offer: Buy any 4 JPG fragrances for 5,500 EGP')
-                    ),
-                    e('div', { className: 'space-y-4' },
-                        perfumes.map((perfume, idx) =>
-                            e('div', { key: idx, className: 'bg-white border border-gray-200 rounded-lg p-5 hover:border-gray-300 transition-colors' },
-                                e('div', { className: 'flex justify-between items-start' },
-                                    e('div', { className: 'flex-1' },
-                                        e('div', { className: 'flex items-center gap-2 mb-1' },
-                                            e('h3', { className: 'text-lg font-medium text-gray-900' }, perfume.name),
-                                            perfume.badge && e('span', { className: 'text-xs px-2 py-1 bg-gray-900 text-white rounded' }, perfume.badge)
-                                        ),
-                                        perfume.deal && e('p', { className: 'text-sm text-gray-600 mt-1' }, perfume.deal)
-                                    ),
-                                    e('div', { className: 'text-right' },
-                                        e('p', { className: 'text-xs text-gray-400 line-through' }, `${perfume.originalPrice} EGP`),
-                                        e('p', { className: 'text-xl font-light text-red-600' }, `${perfume.price} EGP`)
-                                    )
-                                )
-                            )
-                        )
-                    ),
-                    e('div', { className: 'mt-8 p-4 bg-gray-100 rounded-lg text-center' },
-                        e('p', { className: 'text-sm text-gray-700' }, 'Looking for other perfumes?'),
-                        e('a', { href: 'tel:01287620084', className: 'text-gray-900 font-medium hover:underline' }, 'Text me: 01287620084')
-                    )
-                );
-            };
-
-            const renderSets = (sets) => {
-                return e('div', null,
-                    e('div', { className: 'bg-gray-900 text-white p-4 rounded-lg mb-6' },
-                        e('p', { className: 'text-sm font-medium' }, 'Bundled deals for even better value!')
-                    ),
-                    e('div', { className: 'space-y-4' },
-                        sets.map((set, idx) =>
-                            e('div', { key: idx, className: 'bg-white border border-gray-200 rounded-lg p-5 hover:border-gray-300 transition-colors' },
-                                e('div', { className: 'flex justify-between items-start' },
-                                    e('div', { className: 'flex-1' },
-                                        e('h3', { className: 'text-lg font-medium text-gray-900 mb-1' }, set.name),
-                                        e('p', { className: 'text-sm text-gray-600' }, set.description)
-                                    ),
-                                    e('div', { className: 'text-right' },
-                                        e('p', { className: 'text-xs text-gray-400 line-through' }, `${set.originalPrice} EGP`),
-                                        e('p', { className: 'text-xl font-light text-red-600' }, `${set.price} EGP`)
-                                    )
-                                )
-                            )
-                        )
-                    ),
-                    e('div', { className: 'mt-8 p-4 bg-gray-100 rounded-lg text-center' },
-                        e('p', { className: 'text-sm text-gray-700' }, 'Have a custom set in mind?'),
-                        e('a', { href: 'tel:01287620084', className: 'text-gray-900 font-medium hover:underline' }, 'Text me: 01287620084')
-                    )
-                );
-            };
-
-            return e('div', { className: 'min-h-screen' },
-                // Header
-                e('header', { className: 'bg-white border-b border-gray-200' },
-                    e('div', { className: 'max-w-4xl mx-auto px-4 py-6' },
-                        e('h1', { className: 'text-3xl font-light text-gray-900' }, 'Perfume Haven'),
-                        e('p', { className: 'text-sm text-gray-500 mt-1' }, 'Premium Fragrances in Egypt')
-                    )
-                ),
-
-                // Navigation
-                e('nav', { className: 'bg-white border-b border-gray-200 sticky top-0 z-10' },
-                    e('div', { className: 'max-w-4xl mx-auto px-4' },
-                        e('div', { className: 'flex space-x-8' },
-                            e('button', {
-                                onClick: () => setActiveTab('mens'),
-                                className: `py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
-                                    activeTab === 'mens'
-                                        ? 'border-gray-900 text-gray-900'
-                                        : 'border-transparent text-gray-500 hover:text-gray-700'
-                                }`
-                            }, "Men's"),
-                            e('button', {
-                                onClick: () => setActiveTab('womens'),
-                                className: `py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
-                                    activeTab === 'womens'
-                                        ? 'border-gray-900 text-gray-900'
-                                        : 'border-transparent text-gray-500 hover:text-gray-700'
-                                }`
-                            }, "Women's"),
-                            e('button', {
-                                onClick: () => setActiveTab('unisex'),
-                                className: `py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
-                                    activeTab === 'unisex'
-                                        ? 'border-gray-900 text-gray-900'
-                                        : 'border-transparent text-gray-500 hover:text-gray-700'
-                                }`
-                            }, 'Unisex'),
-                            e('button', {
-                                onClick: () => setActiveTab('sets'),
-                                className: `py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
-                                    activeTab === 'sets'
-                                        ? 'border-gray-900 text-gray-900'
-                                        : 'border-transparent text-gray-500 hover:text-gray-700'
-                                }`
-                            }, 'Sets')
-                        )
-                    )
-                ),
-
-                // Content
-                e('main', { className: 'max-w-4xl mx-auto px-4 py-8' },
-                    activeTab === 'mens' && e('div', null,
-                        e('div', { className: 'mb-6' },
-                            e('h2', { className: 'text-2xl font-light text-gray-900 mb-2' }, "Men's Fragrances"),
-                            e('p', { className: 'text-sm text-gray-600' }, 'Premium perfumes for men available in Cairo')
-                        ),
-                        renderPerfumes(mensPerfumes)
-                    ),
-                    activeTab === 'womens' && e('div', null,
-                        e('div', { className: 'mb-6' },
-                            e('h2', { className: 'text-2xl font-light text-gray-900 mb-2' }, "Women's Fragrances"),
-                            e('p', { className: 'text-sm text-gray-600' }, 'Premium perfumes for women available in Cairo')
-                        ),
-                        renderPerfumes(womensPerfumes)
-                    ),
-                    activeTab === 'unisex' && e('div', null,
-                        e('div', { className: 'mb-6' },
-                            e('h2', { className: 'text-2xl font-light text-gray-900 mb-2' }, "Unisex Fragrances"),
-                            e('p', { className: 'text-sm text-gray-600' }, 'Versatile scents for everyone available in Cairo')
-                        ),
-                        renderPerfumes(unisexPerfumes)
-                    ),
-                    activeTab === 'sets' && e('div', null,
-                        e('div', { className: 'mb-6' },
-                            e('h2', { className: 'text-2xl font-light text-gray-900 mb-2' }, "Perfume Sets & Bundles"),
-                            e('p', { className: 'text-sm text-gray-600' }, 'Special bundled pricing on popular fragrance duos')
-                        ),
-                        renderSets(perfumeSets)
+        function renderPerfumes(list) {
+            return e('div', { className: 'grid grid-cols-2 gap-4 p-4' },
+                list.map((item, index) =>
+                    e('div', { key: index, className: 'bg-white rounded-xl shadow-md p-4 text-center' },
+                        e('img', { src: item.img, className: 'w-full h-40 object-cover rounded-lg mb-3' }),
+                        e('p', { className: 'font-medium text-gray-800' }, item.name)
                     )
                 )
             );
         }
 
-        ReactDOM.render(e(App), document.getElementById('app'));
-    </script>
+        function renderSets(list) {
+            return e('div', { className: 'grid grid-cols-1 gap-4 p-4' },
+                list.map((item, index) =>
+                    e('div', { key: index, className: 'bg-white rounded-xl shadow-md p-4 text-center' },
+                        e('img', { src: item.img, className: 'w-full h-48 object-cover rounded-lg mb-3' }),
+                        e('p', { className: 'font-medium text-gray-800 text-lg' }, item.name)
+                    )
+                )
+            );
+        }
+
+        return e('div', null,
+            e('h1', { className: 'text-center text-3xl font-bold py-6 text-gray-900' }, "The Perfume Haven"),
+
+            e('div', { className: 'flex justify-center space-x-4 mb-4' },
+                e('button', {
+                    className: `px-4 py-2 rounded-full ${activeTab === 'men' ? 'bg-black text-white' : 'bg-gray-300 text-gray-800'}`,
+                    onClick: () => setActiveTab('men')
+                }, "Men"),
+
+                e('button', {
+                    className: `px-4 py-2 rounded-full ${activeTab === 'women' ? 'bg-black text-white' : 'bg-gray-300 text-gray-800'}`,
+                    onClick: () => setActiveTab('women')
+                }, "Women"),
+
+                e('button', {
+                    className: `px-4 py-2 rounded-full ${activeTab === 'sets' ? 'bg-black text-white' : 'bg-gray-300 text-gray-800'}`,
+                    onClick: () => setActiveTab('sets')
+                }, "Sets")
+            ),
+
+            activeTab === 'men' && renderPerfumes(menPerfumes),
+            activeTab === 'women' && renderPerfumes(womenPerfumes),
+            activeTab === 'sets' && renderSets(perfumeSets),
+
+            // ⭐ INSTAGRAM SECTION ADDED HERE ⭐
+            e('div', { className: 'mt-16 mb-10 text-center' },
+                e('p', { className: 'text-sm text-gray-600 mb-2' }, 'Follow us on Instagram'),
+                e('a', {
+                    href: 'https://www.instagram.com/theperfumehaven.eg',
+                    target: '_blank',
+                    className: 'text-xl font-medium text-gray-900 hover:underline'
+                }, '@theperfumehaven.eg')
+            )
+        );
+    }
+
+    ReactDOM.render(e(App), document.getElementById('root'));
+</script>
+
 </body>
 </html>
