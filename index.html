@@ -44,6 +44,11 @@
                 {name: "Jean Paul Gaultier Scandal", originalPrice: 6000, price: 4000, badge: "BESTSELLER" },
             ];
 
+            const perfumeSets = [
+                { name: "Men's Power Duo: Bleu de Chanel & Dior Sauvage Set", originalPrice: 10000, price: 9000, description: "Get both premium fragrances together for a bundled discount!" },
+                { name: "Women's Glamour Duo: Good Girl & Victoria's Secret Set", originalPrice: 11000, price: 10000, description: "The perfect pair for any occasion, now at a special price." },
+            ];
+
             const renderPerfumes = (perfumes) => {
                 return e('div', null,
                     e('div', { className: 'bg-gray-900 text-white p-4 rounded-lg mb-6' },
@@ -70,6 +75,34 @@
                     ),
                     e('div', { className: 'mt-8 p-4 bg-gray-100 rounded-lg text-center' },
                         e('p', { className: 'text-sm text-gray-700' }, 'Looking for other perfumes?'),
+                        e('a', { href: 'tel:01287620084', className: 'text-gray-900 font-medium hover:underline' }, 'Text me: 01287620084')
+                    )
+                );
+            };
+
+            const renderSets = (sets) => {
+                return e('div', null,
+                    e('div', { className: 'bg-gray-900 text-white p-4 rounded-lg mb-6' },
+                        e('p', { className: 'text-sm font-medium' }, 'Bundled deals for even better value!')
+                    ),
+                    e('div', { className: 'space-y-4' },
+                        sets.map((set, idx) =>
+                            e('div', { key: idx, className: 'bg-white border border-gray-200 rounded-lg p-5 hover:border-gray-300 transition-colors' },
+                                e('div', { className: 'flex justify-between items-start' },
+                                    e('div', { className: 'flex-1' },
+                                        e('h3', { className: 'text-lg font-medium text-gray-900 mb-1' }, set.name),
+                                        e('p', { className: 'text-sm text-gray-600' }, set.description)
+                                    ),
+                                    e('div', { className: 'text-right' },
+                                        e('p', { className: 'text-xs text-gray-400 line-through' }, `${set.originalPrice} EGP`),
+                                        e('p', { className: 'text-xl font-light text-red-600' }, `${set.price} EGP`)
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    e('div', { className: 'mt-8 p-4 bg-gray-100 rounded-lg text-center' },
+                        e('p', { className: 'text-sm text-gray-700' }, 'Have a custom set in mind?'),
                         e('a', { href: 'tel:01287620084', className: 'text-gray-900 font-medium hover:underline' }, 'Text me: 01287620084')
                     )
                 );
@@ -111,7 +144,15 @@
                                         ? 'border-gray-900 text-gray-900'
                                         : 'border-transparent text-gray-500 hover:text-gray-700'
                                 }`
-                            }, 'Unisex')
+                            }, 'Unisex'),
+                            e('button', {
+                                onClick: () => setActiveTab('sets'),
+                                className: `py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+                                    activeTab === 'sets'
+                                        ? 'border-gray-900 text-gray-900'
+                                        : 'border-transparent text-gray-500 hover:text-gray-700'
+                                }`
+                            }, 'Sets')
                         )
                     )
                 ),
@@ -134,20 +175,17 @@
                     ),
                     activeTab === 'unisex' && e('div', null,
                         e('div', { className: 'mb-6' },
-                            e('h2', { className: 'text-2xl font-light text-gray-900 mb-2' }, 'Unisex Fragrances'),
-                            e('p', { className: 'text-sm text-gray-600' }, 'Perfect for everyone - Arabic & niche perfumes')
+                            e('h2', { className: 'text-2xl font-light text-gray-900 mb-2' }, "Unisex Fragrances"),
+                            e('p', { className: 'text-sm text-gray-600' }, 'Versatile scents for everyone available in Cairo')
                         ),
                         renderPerfumes(unisexPerfumes)
-                    )
-                ),
-
-                // Footer
-                e('footer', { className: 'bg-white border-t border-gray-200 mt-16' },
-                    e('div', { className: 'max-w-4xl mx-auto px-4 py-8' },
-                        e('h3', { className: 'text-lg font-medium text-gray-900 mb-4' }, 'Contact Us'),
-                        e('p', { className: 'text-sm text-gray-600 mb-2' }, 'For inquiries, call or text:'),
-                        e('a', { href: 'tel:01287620084', className: 'text-gray-900 font-medium hover:underline block mb-4' }, '01287620084'),
-                        e('p', { className: 'text-xs text-gray-400' }, '© 2025 Perfume Hub Egypt')
+                    ),
+                    activeTab === 'sets' && e('div', null,
+                        e('div', { className: 'mb-6' },
+                            e('h2', { className: 'text-2xl font-light text-gray-900 mb-2' }, "Perfume Sets & Bundles"),
+                            e('p', { className: 'text-sm text-gray-600' }, 'Special bundled pricing on popular fragrance duos')
+                        ),
+                        renderSets(perfumeSets)
                     )
                 )
             );
