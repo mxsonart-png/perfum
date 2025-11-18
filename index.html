@@ -48,4 +48,176 @@
                     name: "Men's Power Duo: Bleu de Chanel & Dior Sauvage Set",
                     originalPrice: 6000,
                     price: 5000,
-                    d
+                    description: "Get both premium fragrances together for a bundled discount!"
+                },
+                {
+                    name: "Women's Glamour Duo: Good Girl & Victoria's Secret Set",
+                    originalPrice: 7300,
+                    price: 6300,
+                    description: "The perfect pair for any occasion, now at a special price."
+                },
+                {
+                    name: "The Ultimate JPG Seasonal 4-Piece Set",
+                    originalPrice: 6800,
+                    price: 5500,
+                    description:
+                        "Includes Ultra Male, Le Male Le Parfum (Winter) and Le Beau, Le Male (Summer) for a full year rotation."
+                }
+            ];
+
+            const renderPerfumes = (perfumes) => {
+                return e('div', null,
+                    e('div', { className: 'bg-gray-900 text-white p-4 rounded-lg mb-6' },
+                        e('p', { className: 'text-sm font-medium' }, 'Special Offer: Buy any 4 JPG fragrances for 5,500 EGP')
+                    ),
+                    e('div', { className: 'space-y-4' },
+                        perfumes.map((perfume, idx) =>
+                            e('div', { key: idx, className: 'bg-white border border-gray-200 rounded-lg p-5 hover:border-gray-300 transition-colors' },
+                                e('div', { className: 'flex justify-between items-start' },
+                                    e('div', { className: 'flex-1' },
+                                        e('div', { className: 'flex items-center gap-2 mb-1' },
+                                            e('h3', { className: 'text-lg font-medium text-gray-900' }, perfume.name),
+                                            perfume.badge && e('span', { className: 'text-xs px-2 py-1 bg-gray-900 text-white rounded' }, perfume.badge)
+                                        ),
+                                        perfume.deal && e('p', { className: 'text-sm text-gray-600 mt-1' }, perfume.deal)
+                                    ),
+                                    e('div', { className: 'text-right' },
+                                        e('p', { className: 'text-xs text-gray-400 line-through' }, `${perfume.originalPrice} EGP`),
+                                        e('p', { className: 'text-xl font-light text-red-600' }, `${perfume.price} EGP`)
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    e('div', { className: 'mt-8 p-4 bg-gray-100 rounded-lg text-center' },
+                        e('p', { className: 'text-sm text-gray-700' }, 'Looking for other perfumes?'),
+                        e('a', { href: 'tel:01287620084', className: 'text-gray-900 font-medium hover:underline' }, 'Text me: 01287620084')
+                    )
+                );
+            };
+
+            const renderSets = (sets) => {
+                return e('div', null,
+                    e('div', { className: 'bg-gray-900 text-white p-4 rounded-lg mb-6' },
+                        e('p', { className: 'text-sm font-medium' }, 'Bundled deals for even better value!')
+                    ),
+                    e('div', { className: 'space-y-4' },
+                        sets.map((set, idx) =>
+                            e('div', { key: idx, className: 'bg-white border border-gray-200 rounded-lg p-5 hover:border-gray-300 transition-colors' },
+                                e('div', { className: 'flex justify-between items-start' },
+                                    e('div', { className: 'flex-1' },
+                                        e('h3', { className: 'text-lg font-medium text-gray-900 mb-1' }, set.name),
+                                        e('p', { className: 'text-sm text-gray-600' }, set.description)
+                                    ),
+                                    e('div', { className: 'text-right' },
+                                        e('p', { className: 'text-xs text-gray-400 line-through' }, `${set.originalPrice} EGP`),
+                                        e('p', { className: 'text-xl font-light text-red-600' }, `${set.price} EGP`)
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    e('div', { className: 'mt-8 p-4 bg-gray-100 rounded-lg text-center' },
+                        e('p', { className: 'text-sm text-gray-700' }, 'Have a custom set in mind?'),
+                        e('a', { href: 'tel:01287620084', className: 'text-gray-900 font-medium hover:underline' }, 'Text me: 01287620084')
+                    )
+                );
+            };
+
+            return e('div', { className: 'min-h-screen' },
+                e('header', { className: 'bg-white border-b border-gray-200' },
+                    e('div', { className: 'max-w-4xl mx-auto px-4 py-6' },
+                        e('h1', { className: 'text-3xl font-light text-gray-900' }, 'Perfume Haven'),
+                        e('p', { className: 'text-sm text-gray-500 mt-1' }, 'Premium Fragrances in Egypt')
+                    )
+                ),
+
+                e('nav', { className: 'bg-white border-b border-gray-200 sticky top-0 z-10' },
+                    e('div', { className: 'max-w-4xl mx-auto px-4' },
+                        e('div', { className: 'flex space-x-8' },
+                            e('button', {
+                                onClick: () => setActiveTab('mens'),
+                                className: `py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+                                    activeTab === 'mens'
+                                        ? 'border-gray-900 text-gray-900'
+                                        : 'border-transparent text-gray-500 hover:text-gray-700'
+                                }`
+                            }, "Men's"),
+                            e('button', {
+                                onClick: () => setActiveTab('womens'),
+                                className: `py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+                                    activeTab === 'womens'
+                                        ? 'border-gray-900 text-gray-900'
+                                        : 'border-transparent text-gray-500 hover:text-gray-700'
+                                }`
+                            }, "Women's"),
+                            e('button', {
+                                onClick: () => setActiveTab('unisex'),
+                                className: `py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+                                    activeTab === 'unisex'
+                                        ? 'border-gray-900 text-gray-900'
+                                        : 'border-transparent text-gray-500 hover:text-gray-700'
+                                }`
+                            }, 'Unisex'),
+                            e('button', {
+                                onClick: () => setActiveTab('sets'),
+                                className: `py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+                                    activeTab === 'sets'
+                                        ? 'border-gray-900 text-gray-900'
+                                        : 'border-transparent text-gray-500 hover:text-gray-700'
+                                }`
+                            }, 'Sets')
+                        )
+                    )
+                ),
+
+                e('main', { className: 'max-w-4xl mx-auto px-4 py-8' },
+                    activeTab === 'mens' && e('div', null,
+                        e('div', { className: 'mb-6' },
+                            e('h2', { className: 'text-2xl font-light text-gray-900 mb-2' }, "Men's Fragrances"),
+                            e('p', { className: 'text-sm text-gray-600' }, 'Premium perfumes for men available in Cairo')
+                        ),
+                        renderPerfumes(mensPerfumes)
+                    ),
+
+                    activeTab === 'womens' && e('div', null,
+                        e('div', { className: 'mb-6' },
+                            e('h2', { className: 'text-2xl font-light text-gray-900 mb-2' }, "Women's Fragrances"),
+                            e('p', { className: 'text-sm text-gray-600' }, 'Premium perfumes for women available in Cairo')
+                        ),
+                        renderPerfumes(womensPerfumes)
+                    ),
+
+                    activeTab === 'unisex' && e('div', null,
+                        e('div', { className: 'mb-6' },
+                            e('h2', { className: 'text-2xl font-light text-gray-900 mb-2' }, "Unisex Fragrances"),
+                            e('p', { className: 'text-sm text-gray-600' }, 'Versatile scents for everyone available in Cairo')
+                        ),
+                        renderPerfumes(unisexPerfumes)
+                    ),
+
+                    activeTab === 'sets' && e('div', null,
+                        e('div', { className: 'mb-6' },
+                            e('h2', { className: 'text-2xl font-light text-gray-900 mb-2' }, "Perfume Sets & Bundles"),
+                            e('p', { className: 'text-sm text-gray-600' }, 'Special bundled pricing on popular fragrance duos')
+                        ),
+                        renderSets(perfumeSets)
+                    ),
+
+                    /* ⭐ INSTAGRAM SECTION HERE ⭐ */
+                    e('div', { className: 'mt-16 mb-10 text-center' },
+                        e('p', { className: 'text-sm text-gray-600 mb-2' }, 'Follow us on Instagram'),
+                        e('a', {
+                            href: 'https://www.instagram.com/theperfumehaven.eg',
+                            target: '_blank',
+                            className: 'text-xl font-medium text-gray-900 hover:underline'
+                        }, '@theperfumehaven.eg')
+                    )
+                )
+            );
+        }
+
+        ReactDOM.render(e(App), document.getElementById('app'));
+    </script>
+</body>
+</html>
