@@ -19,26 +19,26 @@
             const [activeTab, setActiveTab] = useState('mens');
 
             const mensPerfumes = [
-                { name: "Dior Sauvage", price: 2000, badge: "BESTSELLER" },
-                { name: "Bleu de Chanel", price: 2000, badge: "PREMIUM" },
-                { name: "Versace Eros", price: 1500, badge: "HOT" },
-                { name: "Emporio Armani Stronger With You", price: 1500 },
-                { name: "Valentino Uomo Born in Roma", price: 1700 },
-                { name: "Versace Dylan Blue", price: 1500 },
-                { name: "YSL Y", price: 1400 },
-                { name: "Jean Paul Gaultier Le Male", price: 1700, deal: "4 for 5,500 EGP" },
-                { name: "Jean Paul Gaultier Le Beau", price: 1700, deal: "4 for 5,500 EGP" },
-                { name: "Jean Paul Gaultier Ultra Male", price: 1700, deal: "4 for 5,500 EGP" },
-                { name: "Jean Paul Gaultier Le Male Elixir", price: 1700, deal: "4 for 5,500 EGP" },
-                { name: "Afnan 9PM", price: 1200, badge: "VALUE PICK" }
+                { name: "Dior Sauvage", originalPrice: 5000, price: 2000, badge: "BESTSELLER" },
+                { name: "Bleu de Chanel", originalPrice: 5000, price: 2000, badge: "PREMIUM" },
+                { name: "Versace Eros", originalPrice: 3500, price: 1500, badge: "HOT" },
+                { name: "Emporio Armani Stronger With You", originalPrice: 3500, price: 1500 },
+                { name: "Valentino Uomo Born in Roma", originalPrice: 4000, price: 1700 },
+                { name: "Versace Dylan Blue", originalPrice: 3500, price: 1500 },
+                { name: "YSL Y", originalPrice: 3000, price: 1400 },
+                { name: "Jean Paul Gaultier Le Male", originalPrice: 3500, price: 1700, deal: "4 for 5,500 EGP" },
+                { name: "Jean Paul Gaultier Le Beau", originalPrice: 3500, price: 1700, deal: "4 for 5,500 EGP" },
+                { name: "Jean Paul Gaultier Ultra Male", originalPrice: 5000, price: 2000, deal: "4 for 5,500 EGP" },
+                { name: "Jean Paul Gaultier Le Male Elixir", originalPrice: 3500, price: 1700, deal: "4 for 5,500 EGP" },
+                { name: "Afnan 9PM", originalPrice: 2500, price: 1200, badge: "VALUE PICK" }
             ];
 
             const womensPerfumes = [
-                { name: "Carolina Herrera Good Girl", price: 4000, badge: "BESTSELLER" },
+                { name: "Carolina Herrera Good Girl", originalPrice: 8000, price: 4000, badge: "BESTSELLER" },
             ];
 
             const unisexPerfumes = [
-                { name: "Khamrah by Lattafa", price: 3000, badge: "ARABIC SCENT" },
+                { name: "Khamrah by Lattafa", originalPrice: 6000, price: 3000, badge: "ARABIC SCENT" },
             ];
 
             const renderPerfumes = (perfumes) => {
@@ -58,7 +58,8 @@
                                         perfume.deal && e('p', { className: 'text-sm text-gray-600 mt-1' }, perfume.deal)
                                     ),
                                     e('div', { className: 'text-right' },
-                                        e('p', { className: 'text-xl font-light text-gray-900' }, `${perfume.price} EGP`)
+                                        e('p', { className: 'text-xs text-gray-400 line-through' }, `${perfume.originalPrice} EGP`),
+                                        e('p', { className: 'text-xl font-light text-red-600' }, `${perfume.price} EGP`)
                                     )
                                 )
                             )
@@ -140,33 +141,16 @@
                 // Footer
                 e('footer', { className: 'bg-white border-t border-gray-200 mt-16' },
                     e('div', { className: 'max-w-4xl mx-auto px-4 py-8' },
-                        e('h3', { className: 'text-lg font-medium text-gray-900 mb-4' }, 'Contact'),
-                        e('div', { className: 'space-y-3' },
-                            e('a', { 
-                                href: 'tel:01287620084',
-                                className: 'flex items-center gap-3 text-gray-700 hover:text-gray-900 transition-colors'
-                            }, 
-                                e('span', null, '📞'),
-                                e('span', null, '01287620084')
-                            ),
-                            e('a', { 
-                                href: 'https://wa.me/201287620084',
-                                target: '_blank',
-                                rel: 'noopener noreferrer',
-                                className: 'flex items-center gap-3 text-gray-700 hover:text-gray-900 transition-colors'
-                            }, 
-                                e('span', null, '💬'),
-                                e('span', null, 'WhatsApp')
-                            )
-                        ),
-                        e('p', { className: 'text-sm text-gray-500 mt-6' }, 'In-person sales only • Cash & Telda payments accepted')
+                        e('h3', { className: 'text-lg font-medium text-gray-900 mb-4' }, 'Contact Us'),
+                        e('p', { className: 'text-sm text-gray-600 mb-2' }, 'For inquiries, call or text:'),
+                        e('a', { href: 'tel:01287620084', className: 'text-gray-900 font-medium hover:underline block mb-4' }, '01287620084'),
+                        e('p', { className: 'text-xs text-gray-400' }, '© 2025 Perfume Hub Egypt')
                     )
                 )
             );
         }
 
-        const root = ReactDOM.createRoot(document.getElementById('app'));
-        root.render(React.createElement(App));
+        ReactDOM.render(e(App), document.getElementById('app'));
     </script>
 </body>
 </html>
