@@ -16,31 +16,32 @@
 
         function App() {
             const [activeTab, setActiveTab] = useState('mens');
+            const [expandedIndex, setExpandedIndex] = useState(null);
 
             const mensPerfumes = [
-                { name: "Dior Sauvage", originalPrice: 5000, price: 3000, badge: "BESTSELLER" },
-                { name: "Bleu de Chanel", originalPrice: 5000, price: 2000, badge: "PREMIUM" },
-                { name: "Versace Eros", originalPrice: 3500, price: 2000, badge: "HOT" },
-                { name: "Emporio Armani Stronger With You", originalPrice: 3500, price: 2000 },
-                { name: "Valentino Uomo Born in Roma", originalPrice: 4000, price: 2500 },
-                { name: "Versace Dylan Blue", originalPrice: 3500, price: 2000 },
-                { name: "YSL Y", originalPrice: 3000, price: 2000 },
-                { name: "Jean Paul Gaultier Le Male", originalPrice: 3500, price: 1700, deal: "4 for 5,500 EGP" },
-                { name: "Jean Paul Gaultier Le Beau", originalPrice: 3500, price: 1700, deal: "4 for 5,500 EGP" },
-                { name: "Jean Paul Gaultier Ultra Male", originalPrice: 5000, price: 1700, deal: "4 for 5,500 EGP" },
-                { name: "Jean Paul Gaultier Le Male Elixir", originalPrice: 3500, price: 1700, deal: "4 for 5,500 EGP" },
-                { name: "Afnan 9PM", originalPrice: 2500, price: 1200, badge: "VALUE PICK" }
+                { name: "Dior Sauvage", originalPrice: 5000, price: 3000, badge: "BESTSELLER", description: "Fresh spicy masculine scent." },
+                { name: "Bleu de Chanel", originalPrice: 5000, price: 2000, badge: "PREMIUM", description: "Classic clean blue fragrance." },
+                { name: "Versace Eros", originalPrice: 3500, price: 2000, badge: "HOT", description: "Sweet minty evening scent." },
+                { name: "Emporio Armani Stronger With You", originalPrice: 3500, price: 2000, description: "Warm and comforting vanilla scent." },
+                { name: "Valentino Uomo Born in Roma", originalPrice: 4000, price: 2500, description: "Modern spicy vanilla fragrance." },
+                { name: "Versace Dylan Blue", originalPrice: 3500, price: 2000, description: "Deep aquatic masculine scent." },
+                { name: "YSL Y", originalPrice: 3000, price: 2000, description: "Fresh, clean and modern." },
+                { name: "Jean Paul Gaultier Le Male", originalPrice: 3500, price: 1700, deal: "4 for 5,500 EGP", description: "Sweet minty barbershop smell." },
+                { name: "Jean Paul Gaultier Le Beau", originalPrice: 3500, price: 1700, deal: "4 for 5,500 EGP", description: "Coconut and sweet summer scent." },
+                { name: "Jean Paul Gaultier Ultra Male", originalPrice: 5000, price: 1700, deal: "4 for 5,500 EGP", description: "Very strong clubbing scent." },
+                { name: "Jean Paul Gaultier Le Male Elixir", originalPrice: 3500, price: 1700, deal: "4 for 5,500 EGP", description: "Deep sweet performance beast." },
+                { name: "Afnan 9PM", originalPrice: 2500, price: 1200, badge: "VALUE PICK", description: "Sweet clubbing scent with great value." }
             ];
 
             const womensPerfumes = [
-                { name: "Carolina Herrera Good Girl", originalPrice: 7000, price: 4000, badge: "BESTSELLER" },
-                { name: "Valentino Donna Born In Roma", originalPrice: 5000, price: 3200, badge: "HOT" },
-                { name: "Victoria's Secret", originalPrice: 4000, price: 2500 }
+                { name: "Carolina Herrera Good Girl", originalPrice: 7000, price: 4000, badge: "BESTSELLER", description: "Floral sweet long lasting scent." },
+                { name: "Valentino Donna Born In Roma", originalPrice: 5000, price: 3200, badge: "HOT", description: "Modern sweet vanilla floral." },
+                { name: "Victoria's Secret", originalPrice: 4000, price: 2500, description: "Soft feminine everyday scent." }
             ];
 
             const unisexPerfumes = [
-                { name: "Khamrah by Lattafa", originalPrice: 6000, price: 3000, badge: "ARABIC SCENT" },
-                { name: "Jean Paul Gaultier Scandal", originalPrice: 6000, price: 4000, badge: "BESTSELLER" }
+                { name: "Khamrah by Lattafa", originalPrice: 6000, price: 3000, badge: "ARABIC SCENT", description: "Sweet Arabic gourmand scent." },
+                { name: "Jean Paul Gaultier Scandal", originalPrice: 6000, price: 4000, badge: "BESTSELLER", description: "Strong sweet honey scent." }
             ];
 
             const perfumeSets = [
@@ -71,8 +72,13 @@
                         e('p', { className: 'text-sm font-medium' }, 'Special Offer: Buy any 4 JPG fragrances for 5,500 EGP')
                     ),
                     e('div', { className: 'space-y-4' },
-                        perfumes.map((perfume, idx) =>
-                            e('div', { key: idx, className: 'bg-white border border-gray-200 rounded-lg p-5 hover:border-gray-300 transition-colors' },
+                        perfumes.map((perfume, idx) => {
+                            const isOpen = expandedIndex === idx;
+
+                            return e('div', {
+                                key: idx,
+                                className: 'bg-white border border-gray-200 rounded-lg p-5 hover:border-gray-300 transition-colors'
+                            },
                                 e('div', { className: 'flex justify-between items-start' },
                                     e('div', { className: 'flex-1' },
                                         e('div', { className: 'flex items-center gap-2 mb-1' },
@@ -85,9 +91,28 @@
                                         e('p', { className: 'text-xs text-gray-400 line-through' }, `${perfume.originalPrice} EGP`),
                                         e('p', { className: 'text-xl font-light text-red-600' }, `${perfume.price} EGP`)
                                     )
+                                ),
+
+                                // Dropdown button
+                                e('button', {
+                                    onClick: () => setExpandedIndex(isOpen ? null : idx),
+                                    className: 'mt-3 text-sm text-gray-700 underline'
+                                }, isOpen ? 'Hide Details' : 'View Details'),
+
+                                // Dropdown content
+                                isOpen && e('div', {
+                                    className: 'mt-4 p-4 border-t border-gray-200 bg-gray-50 rounded-lg'
+                                },
+                                    e('img', {
+                                        src: 'https://via.placeholder.com/300x300',
+                                        className: 'w-32 h-32 object-cover rounded mb-3',
+                                    }),
+                                    e('p', { className: 'text-lg font-medium text-gray-900' }, perfume.name),
+                                    e('p', { className: 'text-sm text-gray-600 mt-1' }, `Price: ${perfume.price} EGP`),
+                                    e('p', { className: 'text-sm text-gray-500 mt-2' }, perfume.description || 'No description provided.')
                                 )
-                            )
-                        )
+                            );
+                        })
                     ),
                     e('div', { className: 'mt-8 p-4 bg-gray-100 rounded-lg text-center' },
                         e('p', { className: 'text-sm text-gray-700' }, 'Looking for other perfumes?'),
@@ -204,7 +229,7 @@
                         renderSets(perfumeSets)
                     ),
 
-                    /* ⭐ INSTAGRAM SECTION HERE ⭐ */
+                    /* ⭐ INSTAGRAM SECTION ⭐ */
                     e('div', { className: 'mt-16 mb-10 text-center' },
                         e('p', { className: 'text-sm text-gray-600 mb-2' }, 'Follow us on Instagram'),
                         e('a', {
